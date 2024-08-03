@@ -18,23 +18,23 @@ func New() *Store {
 
 func (s *Store) Set(key string, value int) {
 	s.mu.Lock()
+	defer s.mu.Unlock()
 	s.data[key] = value
-	s.mu.Unlock()
 }
 
 func (s *Store) Get(key string) (int, error) {
 	s.mu.RLock()
+	defer s.mu.RUnlock()
 	value, ok := s.data[key]
 	if !ok {
 		return -1, errors.New("KEY NOT FOUND")
 	}
-	s.mu.RUnlock()
 
 	return value, nil
 }
 
 func (s *Store) Delete(key string) {
 	s.mu.Lock()
+	defer s.mu.Unlock()
 	delete(s.data, key)
-	s.mu.Unlock()
 }

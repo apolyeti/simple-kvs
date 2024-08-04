@@ -17,6 +17,8 @@ WORKDIR /app
 
 COPY --from=builder /app/main .
 
+RUN apk add --no-cache bash curl
+
 EXPOSE 8080
 EXPOSE 50051
 

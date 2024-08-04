@@ -7,6 +7,8 @@ COPY go.mod go.sum ./
 
 RUN go mod download
 
+RUN apk --no-cache add curl
+
 COPY . .
 
 RUN go build -o main .
@@ -16,8 +18,6 @@ FROM alpine:latest
 WORKDIR /app
 
 COPY --from=builder /app/main .
-
-RUN apk add --no-cache bash curl
 
 EXPOSE 8080
 EXPOSE 50051

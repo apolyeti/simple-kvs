@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kvs
+spec: 
+  containers:
+  - name: kvs
+    image: kvs:latest
+    imagePullPolicy: Never
+    resources:
+      limits:
+        cpu: "500m"
